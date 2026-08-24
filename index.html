@@ -564,7 +564,7 @@
                 .speaker-gallery img:hover { transform: scale(1.08); }
                 .speaker-gallery figcaption { margin-top: 10px; font-size: 14px; font-weight: bold; color: #222; }
             </style>
-            <div class="speaker-gallery" aria-label="Speakers">
+            <div class="speaker-gallery" aria-label="Speakers" style="display: none;">
                 <figure><img src="img/fotos/spk_aguila_daniel.jpg" alt="Daniel Aguila"><figcaption>Daniel Aguila</figcaption></figure>
                 <figure><img src="img/fotos/spk_acuna_pablo.jpg" alt="Pablo Acuña"><figcaption>Pablo Acuña</figcaption></figure>
                 <figure><img src="img/fotos/spk_argueta_norma.jpg" alt="Norma Argueta"><figcaption>Norma Argueta</figcaption></figure>
@@ -597,6 +597,52 @@
                 <figure><img src="img/fotos/spk_tiamiyu_afees.jpg" alt="Afees Tiamiyu"><figcaption>Afees Tiamiyu</figcaption></figure>
                 <figure><img src="img/fotos/spk_trejo_jonathan.jpg" alt="Jonathan Trejo"><figcaption>Jonathan Trejo</figcaption></figure>
             </div>
+            <div id="recovered-speakers" aria-live="polite"></div>
+            <script>
+              document.addEventListener('DOMContentLoaded', async () => {
+                const target = document.getElementById('recovered-speakers');
+                try {
+                  const response = await fetch('speakers-source.html');
+                  if (!response.ok) throw new Error('No fue posible cargar el catálogo de ponentes.');
+                  const source = new DOMParser().parseFromString(await response.text(), 'text/html');
+                  const form = source.querySelector('form[method="GET"]');
+                  const gallery = source.querySelector('.sphere-container');
+                  const cards = source.querySelector('#speakers');
+                  const speakerStyle = [...source.querySelectorAll('style')].find(style => style.textContent.includes('.sphere-container'));
+                  if (!form || !gallery || !cards) throw new Error('El catálogo recuperado no tiene el formato esperado.');
+                  form.querySelector('input[name="q"]').id = 'speaker-search';
+                  form.removeAttribute('method');
+                  form.addEventListener('submit', event => event.preventDefault());
+                  gallery.querySelectorAll('a[href*="#"]').forEach(link => {
+                    const id = link.href.split('#').pop();
+                    link.href = '#' + id;
+                    link.addEventListener('click', event => {
+                      event.preventDefault();
+                      const card = document.getElementById(id);
+                      if (!card) return;
+                      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      const accordion = card.querySelector('.accordion-content');
+                      if (accordion && accordion.style.display !== 'block') toggleAccordion(accordion.id);
+                    });
+                  });
+                  const filter = () => {
+                    const query = form.querySelector('input[name="q"]').value.trim().toLocaleLowerCase();
+                    gallery.querySelectorAll('.speaker-block').forEach(block => {
+                      const match = block.textContent.toLocaleLowerCase().includes(query);
+                      block.style.display = match ? '' : 'none';
+                      const id = block.querySelector('a').hash.slice(1);
+                      const card = document.getElementById(id);
+                      if (card) card.style.display = match ? '' : 'none';
+                    });
+                  };
+                  form.querySelector('input[name="q"]').addEventListener('input', filter);
+                  target.append(speakerStyle.cloneNode(true), form, gallery, cards);
+                } catch (error) {
+                  target.textContent = 'No se pudo cargar el catálogo de ponentes.';
+                  console.error(error);
+                }
+              });
+            </script>
 
             <div class="w-100 px-2">
                 <div class="row">
