@@ -1,0 +1,41 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("commentForm");
+    const successMessage = document.getElementById("successMessage");
+
+    // 👇 Aquí agregamos el listener para mostrar el formulario al hacer clic en la imagen
+    const showFormTrigger = document.getElementById("showFormTrigger");
+    const formContainer = document.getElementById("formContainer");
+
+    if (showFormTrigger && formContainer) {
+        showFormTrigger.addEventListener("click", function () {
+            formContainer.style.display = "block";
+            formContainer.scrollIntoView({ behavior: "smooth" });
+        });
+    }
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+
+        fetch("mail/contact_me.php", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.text().then(text => {
+            if (response.ok) {
+                successMessage.className = "alert alert-success mt-3";
+                successMessage.innerHTML = "✅ ¡Mensaje enviado correctamente!";
+                form.reset();
+            } else {
+                throw new Error(text);
+            }
+        }))
+        .catch(error => {
+            successMessage.className = "alert alert-danger mt-3";
+            successMessage.innerHTML = "❌ Error al enviar mensaje: <br><small>" + error.message + "</small>";
+        });
+
+        successMessage.style.display = "block";
+    });
+});
