@@ -673,7 +673,7 @@
 
 
                 <!-- Program Committee -->
-                <h4 class="border-bottom pb-2" style="color: #2B77C4; text-align: center;">Organizing Committee:</h4>
+                <h4 class="committee-title border-bottom pb-2" style="color: #2B77C4; text-align: center;">Organizing Committee:</h4>
 
                 <div class="mb-4 d-flex align-items-start">
                     <img src="img/fotos/cmt_montiel_oscar.jpg" alt="Dr. Oscar Montiel Ross" class="rounded me-3"
@@ -1143,9 +1143,9 @@
   .cta-banner { display:block; width:100%; height:auto; border:0 !important; border-radius:0 !important; }
   .registration-cta:hover, .registration-cta:focus, .feedback-cta:hover, .feedback-cta:focus { transform:translateY(-5px); box-shadow:0 14px 30px #8A1B5260; }
 
-  /* Movimiento ambiental lento: el cartel se desplaza suavemente con luz y color, sin el zoom previo. */
-  .cover-image { animation:cover-ambient 12s ease-in-out infinite alternate; transform-origin:center; will-change:transform,filter; }
-  @keyframes cover-ambient { from { transform:scale(1.015) translateX(-0.35%); filter:saturate(1) brightness(1); } to { transform:scale(1.04) translateX(0.35%); filter:saturate(1.1) brightness(1.06); } }
+  /* Efecto de luz cromática: la portada permanece fija y recibe un brillo suave de la paleta. */
+  .cover-image { animation:cover-chroma 5.5s ease-in-out infinite; will-change:filter; }
+  @keyframes cover-chroma { 0%,100% { filter:brightness(1) saturate(1); } 50% { filter:brightness(1.09) saturate(1.16) hue-rotate(4deg); } }
   @media (prefers-reduced-motion: reduce) { .registration-cta, .feedback-cta, .cover-image { animation:none !important; transform:none !important; } }
 </style>
 </body>
