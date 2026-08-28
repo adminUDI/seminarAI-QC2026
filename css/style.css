@@ -239,3 +239,27 @@ p {
 .text-footer{
   padding-top: 3%;
 }
+
+/* Paleta SemAI&QC 2026 */
+:root {
+  --ai-ink: #121319;
+  --ai-blue: #2B77C4;
+  --ai-sky: #3498DB;
+  --ai-cyan: #2ED9E8;
+  --ai-cyan-light: #4BEAF5;
+  --ai-magenta: #D12B7F;
+  --ai-magenta-dark: #B21F68;
+  --ai-wine: #8A1B52;
+  --ai-white: #FFFFFF;
+  --ai-mist: #DCE3E8;
+}
+
+body { color: var(--ai-ink); background: var(--ai-white); }
+h1, h2, h3, h4 { color: var(--ai-wine); }
+.navbar.color-nvbar { background: var(--ai-ink) !important; border-bottom: 4px solid var(--ai-magenta); }
+.navbar .nav-link, .navbar .navbar-brand { transition: color .2s ease, background .2s ease; }
+.navbar .nav-link:hover, .navbar .navbar-brand:hover { color: var(--ai-cyan-light) !important; background: var(--ai-wine); }
+.dropdown-btn, .btn-primary, button { background-color: var(--ai-blue); border-color: var(--ai-blue); color: var(--ai-white); }
+.dropdown-btn:hover, .btn-primary:hover, button:hover { background-color: var(--ai-magenta-dark); border-color: var(--ai-magenta-dark); }
+.dropdown-content { background: #f8fbfd; border-color: var(--ai-mist); }
+.footer { background: var(--ai-ink); border-top: 4px solid var(--ai-magenta); }
