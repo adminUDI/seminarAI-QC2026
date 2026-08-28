@@ -364,8 +364,10 @@
                 max-width: 50%;
             }
         </style>
-        <img class="cover-image" alt="Cartel" src="img/AI&amp;QC-Opción1.jpg"
-            style="width: 100vw; max-width: 100%; display: block; margin: 0 auto; padding: 0; border: 0;" />
+        <div class="cover-light">
+            <img class="cover-image" alt="Cartel" src="img/AI&amp;QC-Opción1.jpg"
+                style="width: 100vw; max-width: 100%; display: block; margin: 0 auto; padding: 0; border: 0;" />
+        </div>
         <img alt="Cartel" src="img/titulo_seleccion/mnu-1.jpg"
             style="width: 100vw; max-width: 100%; display: block; margin: 0 auto; padding: 0; border: 0;" />
         <section
@@ -737,7 +739,7 @@
                 <h4 class="committee-title border-bottom pb-2 mt-5" style="color: #2B77C4;">Chairs:
                 </h4>
                 <!-- Chairs October 15 -->
-                <h4 class="border-bottom pb-2 mt-5" style="color: #2B77C4;">October 15, 2026</h4>
+                <h4 class="committee-date border-bottom pb-2 mt-5" style="color: #2B77C4;">October 15, 2026</h4>
 
                 <div class="mb-4 d-flex align-items-start">
                     <img src="img/fotos/cmt_montiel_oscar.jpg" alt="Oscar H. Montiel Ross" class="rounded me-3"
@@ -763,7 +765,7 @@
 
 
                 <!-- Chairs October 16 -->
-                <h4 class="border-bottom pb-2 mt-5" style="color: #2B77C4;">October 16, 2026</h4>
+                <h4 class="committee-date border-bottom pb-2 mt-5" style="color: #2B77C4;">October 16, 2026</h4>
 
                 <div class="mb-4 d-flex align-items-start">
                     <img src="img/fotos/spk_Moises.jpg" alt="Moisés Sánchez Adame" class="rounded me-3"
@@ -1119,6 +1121,7 @@
   #countdown { color:var(--magenta) !important; }
   h3, h4 { color:var(--wine) !important; }
   .committee-title { color:var(--wine) !important; text-align:center; border-bottom:2px solid var(--cyan) !important; margin-left:auto; margin-right:auto; }
+  .committee-date { color:var(--wine) !important; border-bottom:2px solid var(--blue) !important; }
 
   /* Agenda: azul para estructura, magenta para acciones y cian para los momentos clave. */
   .program-2026 .program-block { border:0; box-shadow:0 7px 20px #12131938; }
@@ -1143,10 +1146,12 @@
   .cta-banner { display:block; width:100%; height:auto; border:0 !important; border-radius:0 !important; }
   .registration-cta:hover, .registration-cta:focus, .feedback-cta:hover, .feedback-cta:focus { transform:translateY(-5px); box-shadow:0 14px 30px #8A1B5260; }
 
-  /* Efecto de luz cromática: la portada permanece fija y recibe un brillo suave de la paleta. */
-  .cover-image { animation:cover-chroma 5.5s ease-in-out infinite; will-change:filter; }
-  @keyframes cover-chroma { 0%,100% { filter:brightness(1) saturate(1); } 50% { filter:brightness(1.09) saturate(1.16) hue-rotate(4deg); } }
-  @media (prefers-reduced-motion: reduce) { .registration-cta, .feedback-cta, .cover-image { animation:none !important; transform:none !important; } }
+  /* Barrido de luces cian y magenta sobre una portada fija. */
+  .cover-light { position:relative; width:100%; overflow:hidden; isolation:isolate; }
+  .cover-image { position:relative; z-index:1; }
+  .cover-light::after { content:""; position:absolute; z-index:2; inset:-30% -55%; pointer-events:none; background:linear-gradient(112deg, transparent 39%, #2ED9E820 46%, #4BEAF570 50%, #D12B7F38 54%, transparent 61%); mix-blend-mode:screen; animation:cover-light-sweep 5.8s ease-in-out infinite; }
+  @keyframes cover-light-sweep { 0%,100% { transform:translateX(-28%) skewX(-8deg); opacity:.3; } 48% { opacity:.8; } 55% { transform:translateX(28%) skewX(-8deg); opacity:.75; } 72% { opacity:.25; } }
+  @media (prefers-reduced-motion: reduce) { .registration-cta, .feedback-cta, .cover-image, .cover-light::after { animation:none !important; transform:none !important; } }
 </style>
 </body>
 
