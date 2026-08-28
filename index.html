@@ -494,7 +494,7 @@
 
            
             <div id="programPopup" class="program-modal" aria-hidden="true"><section class="program-modal-panel" role="dialog" aria-modal="true" aria-label="Event program"><button class="program-modal-close" type="button" onclick="closeProgramSchedule()" aria-label="Close">&times;</button><div id="programPopupContent"></div></section></div>
-            <script>function showProgramSchedule(day){const t=document.getElementById('program-'+day),m=document.getElementById('programPopup'),c=document.getElementById('programPopupContent');if(!t||!m||!c)return;c.innerHTML=t.innerHTML;m.style.display='block';m.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}function closeProgramSchedule(){const m=document.getElementById('programPopup');m.style.display='none';m.setAttribute('aria-hidden','true');document.body.style.overflow='';}document.addEventListener('keydown',e=>{if(e.key==='Escape')closeProgramSchedule();});</script>
+            <script>function showProgramSchedule(day){const t=document.getElementById('program-'+day),m=document.getElementById('programPopup'),c=document.getElementById('programPopupContent');if(!t||!m||!c)return;c.innerHTML=t.innerHTML;const breaks=day==='oct15'?[['09:00','REGISTRATION - DAY 1'],['09:30','WELCOME - Dr. Oscar Montiel Ross'],['11:20','COFFEE BREAK'],['14:40','CLOSING - DAY 1']]:[['09:00','REGISTRATION - DAY 2'],['09:30','WELCOME - Dr. Oscar Montiel Ross'],['11:20','COFFEE BREAK'],['15:00','CLOSING - DAY 2']];const body=c.querySelector('.program-table tbody');if(body){const rows=[...body.rows].map(row=>({time:row.cells[0].textContent.trim(),row}));breaks.forEach(([time,label])=>{const row=document.createElement('tr');row.className='program-milestone';row.innerHTML='<td>'+time+'</td><td colspan="3">'+label+'</td>';rows.push({time,row});});rows.sort((a,b)=>a.time.localeCompare(b.time));body.replaceChildren(...rows.map(item=>item.row));}m.style.display='block';m.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}function closeProgramSchedule(){const m=document.getElementById('programPopup');m.style.display='none';m.setAttribute('aria-hidden','true');document.body.style.overflow='';}document.addEventListener('keydown',e=>{if(e.key==='Escape')closeProgramSchedule();});</script>
 
 
         
@@ -512,7 +512,7 @@
 .program-2026 .program-block { width:400px; max-width:100%; padding:0; border:0; border-radius:10px; background:white; overflow:hidden; cursor:pointer; box-shadow:0 5px 17px #002b3530; transition:transform .25s ease,box-shadow .25s ease; }
 .program-2026 .program-block:hover { transform:translateY(-8px) scale(1.02); box-shadow:0 14px 30px #002b3550; }.program-2026 img { display:block; width:100%; }.program-2026 span { display:block; padding:11px; color:#004b57; font-weight:700; }
 .program-download { display:inline-block; margin-top:13px; padding:10px 18px; border-radius:7px; background:#2B77C4; color:#fff; font-weight:700; text-decoration:none; transition:background .2s ease, transform .2s ease; }.program-download:hover,.program-download:focus { background:#3498DB; color:#fff; transform:translateY(-2px); }
-.program-modal { display:none; position:fixed; z-index:2000; inset:0; overflow:auto; padding:30px 16px; background:#000b; }.program-modal-panel { position:relative; max-width:1120px; margin:20px auto; padding:36px; background:white; border-radius:12px; }.program-modal-close { position:absolute; right:12px; top:6px; border:0; background:none; font-size:36px; cursor:pointer; color:#004b57; }.schedule-wrap { overflow-x:auto; }.program-table { width:100%; border-collapse:collapse; min-width:720px; }.program-table th,.program-table td { padding:11px; border-bottom:1px solid #d7e0e1; text-align:left; vertical-align:top; }.program-table th { background:#004b57; color:white; }.program-table td:first-child { white-space:nowrap; font-weight:700; }
+.program-modal { display:none; position:fixed; z-index:2000; inset:0; overflow:auto; padding:30px 16px; background:#000b; }.program-modal-panel { position:relative; max-width:1120px; margin:20px auto; padding:36px; background:white; border-radius:12px; }.program-modal-close { position:absolute; right:12px; top:6px; border:0; background:none; font-size:36px; cursor:pointer; color:#004b57; }.schedule-wrap { overflow-x:auto; }.program-table { width:100%; border-collapse:collapse; min-width:720px; }.program-table th,.program-table td { padding:11px; border-bottom:1px solid #d7e0e1; text-align:left; vertical-align:top; }.program-table th { background:#004b57; color:white; }.program-table td:first-child { white-space:nowrap; font-weight:700; }.program-table .program-milestone td { background:#e9f4fc; color:#2B77C4; font-weight:800; letter-spacing:.04em; border-bottom:1px solid #b8d7ef; }.program-table .program-milestone td:first-child { color:#2B77C4; }
 </style>
 
         <section id="speak">
@@ -606,7 +606,13 @@
               });
               function openSpeakerViewer(url) {
                 const modal = document.getElementById('speakerViewer');
-                document.getElementById('speakerViewerFrame').src = url;
+                const frame = document.getElementById('speakerViewerFrame');
+                frame.onload = () => {
+                  const style = frame.contentDocument.createElement('style');
+                  style.textContent = 'main > p:first-child { display: none !important; }';
+                  frame.contentDocument.head.append(style);
+                };
+                frame.src = url;
                 modal.style.display = 'block';
                 modal.setAttribute('aria-hidden', 'false');
                 document.body.style.overflow = 'hidden';
