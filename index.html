@@ -703,7 +703,7 @@
                 </div>
 
                 <!-- Honorary Members -->
-                <h4 class="border-bottom pb-2 mt-5" style="color: #2B77C4;">Honorary Members of the Organizing Committee:
+                <h4 class="committee-title border-bottom pb-2 mt-5" style="color: #2B77C4;">Honorary Members of the Organizing Committee:
                 </h4>
 
                 <div class="mb-4 d-flex align-items-start">
@@ -734,7 +734,7 @@
                 </br>
 
 
-                <h4 class="border-bottom pb-2 mt-5" style="color: #2B77C4;">Chairs:
+                <h4 class="committee-title border-bottom pb-2 mt-5" style="color: #2B77C4;">Chairs:
                 </h4>
                 <!-- Chairs October 15 -->
                 <h4 class="border-bottom pb-2 mt-5" style="color: #2B77C4;">October 15, 2026</h4>
@@ -817,10 +817,10 @@
 
 
 
-            <div style="text-align: center;">
+            <div class="cta-panel">
                 <a class="registration-cta" href="https://forms.office.com/r/s2c9ALZQ5v" target="_blank" rel="noopener noreferrer">
                     <img alt="Register for In-Person Attendance" src="img/GoogleForms.jpg"
-                        style="width: 60%; height: auto; border-radius: 12px;" />
+                        class="cta-banner" />
                 </a>
             </div>
 
@@ -970,10 +970,10 @@
 
 
 
-            <div style="text-align: center;">
+            <div class="cta-panel">
                 <div id="showFormTrigger" class="feedback-cta" style="cursor: pointer; display: inline-block;">
                     <img alt="Register for In-Person Attendance" src="img/G-Forms_Comentarios.jpg"
-                        style="width: 60%; height: auto; border-radius: 12px;" />
+                        class="cta-banner" />
                 </div>
             </div>
 
@@ -1107,27 +1107,46 @@
     <script src="js/scrollButtons.js"></script>
 
 <style id="palette-2026">
-  body { background: #FFFFFF; color: #121319; }
-  .navbar.color-nvbar { background: #121319 !important; border-bottom: 4px solid #2B77C4; }
-  .navbar .nav-link:hover, .navbar .navbar-brand:hover { color: #FFFFFF !important; background: #2B77C4; }
-  #scrollToTopBtn, #goBackBtn, .btn-primary { background-color: #2B77C4 !important; border-color: #2B77C4 !important; }
-  #scrollToTopBtn:hover, #goBackBtn:hover, .btn-primary:hover { background-color: #3498DB !important; border-color: #3498DB !important; }
-  .accordion-btn { background-color: #2B77C4 !important; border-left: 4px solid #2ED9E8; }
-  .accordion-btn:hover { background-color: #3498DB !important; }
-  .accordion-content { background: #F8FBFD !important; border-color: #DCE3E8 !important; }
-  #countdown { color: #2B77C4 !important; }
-  h3, h4 { color: #2B77C4 !important; }
-  .registration-cta { display:inline-block; border-radius:12px; animation:registration-float 2.8s ease-in-out infinite; box-shadow:0 8px 22px #2B77C455; }
-  .registration-cta:hover, .registration-cta:focus { animation-play-state:paused; transform:translateY(-8px) scale(1.025); box-shadow:0 16px 32px #3498DB70; }
-  .registration-cta img { display:block; }
-  @keyframes registration-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-7px); } }
-  .feedback-cta { border-radius:12px; animation:feedback-float 3.2s ease-in-out infinite; box-shadow:0 8px 22px #2B77C445; }
-  .feedback-cta:hover, .feedback-cta:focus { animation-play-state:paused; transform:translateY(-7px) scale(1.02); box-shadow:0 16px 32px #3498DB70; }
-  .feedback-cta img { display:block; }
-  .cover-image { animation:cover-drift 8s ease-in-out infinite; transform-origin:center; will-change:transform; }
-  @keyframes feedback-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-6px); } }
-  @keyframes cover-drift { 0%,100% { transform:scale(1); } 50% { transform:scale(1.012); } }
-  @media (prefers-reduced-motion: reduce) { .registration-cta, .feedback-cta, .cover-image { animation:none !important; } }
+  :root { --ink:#121319; --blue:#2B77C4; --sky:#3498DB; --cyan:#2ED9E8; --magenta:#D12B7F; --wine:#8A1B52; --mist:#DCE3E8; }
+  body { background:#FFFFFF; color:var(--ink); overflow-x:hidden; }
+  .navbar.color-nvbar { background:var(--ink) !important; border-bottom:4px solid var(--magenta); }
+  .navbar .nav-link:hover, .navbar .navbar-brand:hover { color:#FFFFFF !important; background:var(--wine); }
+  #scrollToTopBtn, #goBackBtn, .btn-primary { background-color:var(--blue) !important; border-color:var(--blue) !important; }
+  #scrollToTopBtn:hover, #goBackBtn:hover, .btn-primary:hover { background-color:var(--magenta) !important; border-color:var(--magenta) !important; }
+  .accordion-btn { background-color:var(--blue) !important; border-left:4px solid var(--cyan); }
+  .accordion-btn:hover { background-color:var(--wine) !important; }
+  .accordion-content { background:#F8FBFD !important; border-color:var(--mist) !important; }
+  #countdown { color:var(--magenta) !important; }
+  h3, h4 { color:var(--wine) !important; }
+  .committee-title { color:var(--wine) !important; text-align:center; border-bottom:2px solid var(--cyan) !important; margin-left:auto; margin-right:auto; }
+
+  /* Agenda: azul para estructura, magenta para acciones y cian para los momentos clave. */
+  .program-2026 .program-block { border:0; box-shadow:0 7px 20px #12131938; }
+  .program-2026 .program-block:hover { box-shadow:0 16px 34px #8A1B5260; }
+  .program-2026 span { color:var(--wine); background:#FFFFFF; }
+  .program-download { background:var(--magenta); border:0; box-shadow:none; }
+  .program-download:hover, .program-download:focus { background:var(--wine); }
+  .program-modal { background:#121319e8; }
+  .program-modal-panel { border-top:6px solid var(--magenta); box-shadow:0 20px 48px #0008; }
+  .program-modal-close { color:var(--wine); }
+  .program-modal-close:hover { color:var(--magenta); }
+  .program-modal-panel h2 { color:var(--wine); }
+  .program-table th { background:var(--blue); color:#FFFFFF; }
+  .program-table td { border-bottom-color:var(--mist); }
+  .program-table tbody tr:nth-child(even):not(.program-milestone) { background:#F3FAFD; }
+  .program-table td:first-child { color:var(--wine); }
+  .program-table .program-milestone td, .program-table .program-milestone td:first-child { background:#E8F8FA; color:var(--wine); border-bottom-color:var(--cyan); }
+
+  /* Banners de registro y contacto sin marco blanco. */
+  .cta-panel { display:flex; justify-content:center; margin:0 auto 2.5rem; padding:0; background:transparent; }
+  .registration-cta, .feedback-cta { display:block !important; width:min(100%, 1000px); border:0 !important; outline:0; border-radius:12px; overflow:hidden; background:transparent; box-shadow:none; }
+  .cta-banner { display:block; width:100%; height:auto; border:0 !important; border-radius:0 !important; }
+  .registration-cta:hover, .registration-cta:focus, .feedback-cta:hover, .feedback-cta:focus { transform:translateY(-5px); box-shadow:0 14px 30px #8A1B5260; }
+
+  /* Movimiento ambiental lento: el cartel se desplaza suavemente con luz y color, sin el zoom previo. */
+  .cover-image { animation:cover-ambient 12s ease-in-out infinite alternate; transform-origin:center; will-change:transform,filter; }
+  @keyframes cover-ambient { from { transform:scale(1.015) translateX(-0.35%); filter:saturate(1) brightness(1); } to { transform:scale(1.04) translateX(0.35%); filter:saturate(1.1) brightness(1.06); } }
+  @media (prefers-reduced-motion: reduce) { .registration-cta, .feedback-cta, .cover-image { animation:none !important; transform:none !important; } }
 </style>
 </body>
 
